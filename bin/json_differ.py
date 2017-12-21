@@ -21,12 +21,16 @@ class JsonFileComparer(object):
     format:
         key \t  json-string
     """
-    def do(self, fthis, fother):
-        one = self.load_file(fthis)
-        other = self.load_file(fother)
-        return Equals.cmp(one, other)
+    def load_files(self, fthis, fother):
+        self.one = self.__load_file(fthis)
+        self.other = self.__load_file(fother)
 
-    def load_file(self, f):
+    def generator(self):
+        for k, v in self.one.iteritems():
+            equals, r = Equals.cmp(v, self.other[v])
+            yield k, equals, r
+
+    def __load_file(self, f):
         d = {}
         with open(f, 'rb') as fd:
             for line in fd:
