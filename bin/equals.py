@@ -98,6 +98,9 @@ class Equals(object):
         if not isinstance(one, list) or not isinstance(other, list):
             return False, False
 
+        if len(one) == 0 and len(other) == 0:
+            return True, True
+
         for a, b in zip(sorted(one), sorted(other)):
             e, ret = Equals.cmp(a, b)
             equals &= e
