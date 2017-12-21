@@ -27,7 +27,7 @@ class JsonFileComparer(object):
 
     def generator(self):
         for k, v in self.one.iteritems():
-            equals, r = Equals.cmp(v, self.other[v])
+            equals, r = Equals.cmp(v, self.other[k])
             yield k, equals, r
 
     def __load_file(self, f):
