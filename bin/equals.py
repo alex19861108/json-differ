@@ -93,7 +93,7 @@ class Equals(object):
 
     @staticmethod
     def list(one, other):
-        r = {}
+        r = []
         equals = True
         if not isinstance(one, list) or not isinstance(other, list):
             return False, False
@@ -104,7 +104,7 @@ class Equals(object):
         for a, b in zip(sorted(one), sorted(other)):
             e, ret = Equals.cmp(a, b)
             equals &= e
-            r = ret
+            r.append(ret)
         return equals, r
 
 
