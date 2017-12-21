@@ -6,10 +6,14 @@ class Equals(object):
         r = {}
         if not type(one) == type(other):
             r['__type__'] = False
-            return False
+            return False, r
 
         if not isinstance(one, dict) or not isinstance(other, dict):
-            return False
+            r['__type__'] = False
+            return False, r
+
+        if len(one) == 0 and len(other) == 0:
+            return True, True
 
         equals = True
         for k, v in one.iteritems():
@@ -26,7 +30,8 @@ class Equals(object):
         equals = True
         if not type(one) == type(other):
             r['__type__'] = False
-            return False, False
+            equals = False
+            return equals, r
 
         if isinstance(one, int):
             equals, r = Equals.int(one, other)
