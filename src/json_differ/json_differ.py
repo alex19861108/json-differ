@@ -39,12 +39,6 @@ class JsonFileComparer(object):
                     key, json_string = pieces
                     d[key] = json.loads(json_string)
 
-                    # filter
-                    if 'faces' in d[key]:
-                        for face in d[key]['faces']:
-                            if 'landmark' in face:
-                                del face['landmark']
-
         return d
 
 if __name__ == '__main__':
