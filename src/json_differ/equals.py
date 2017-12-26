@@ -18,7 +18,7 @@ class Equals(object):
         equals = True
         for k, v in one.iteritems():
             if k not in other.keys():
-                return False
+                return False, r
             e, ret = Equals.cmp(v, other[k])
             equals &= e
             r[k] = ret
@@ -111,4 +111,6 @@ class Equals(object):
 if __name__ == '__main__':
     xx = {"111": None, "23456": {"22222": 9999, "33333": "0000", "list": ["3333", "4444", "111"]}}
     yy = {"111": None, "23456": {"22222": 9999, "33333": "0000", "list": ["111", "3333", "4444"]}}
+    xx = {"error_message": "INVALID_IMAGE_URL"}
+    yy = {"image_id": "0Ajals8uygFhXbOGzKpqCQ==", "faces": [{"face_rectangle": {"width": 86, "top": 277, "height": 86, "left": 169}}]}
     print Equals.cmp(xx, yy)
