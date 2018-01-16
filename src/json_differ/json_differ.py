@@ -2,6 +2,7 @@
 import json
 from equals import Equals
 
+
 class JsonItem(object):
     """
     compare two json string
@@ -15,22 +16,28 @@ class JsonItem(object):
     def __eq__(self, other):
         return Equals.cmp(self._d, other.data())
 
-class JsonFileComparer(object):
+
+class JsonFileDiffer(object):
     """
     compare two file
     format:
         key \t  json-string
     """
-    def load_files(self, fthis, fother):
-        self.one = self.__load_file(fthis)
-        self.other = self.__load_file(fother)
+    def __init__(self):
+        self.one = {}
+        self.another = {}
+
+    def load_files(self, file_this, file_another):
+        self.one = JsonFileDiffer.__load_file(file_this)
+        self.another = JsonFileDiffer.__load_file(file_another)
 
     def generator(self):
         for k, v in self.one.iteritems():
-            equals, r = Equals.cmp(v, self.other[k])
+            equals, r = Equals.cmp(v, self.another[k])
             yield k, equals, r
 
-    def __load_file(self, f):
+    @staticmethod
+    def __load_file(f):
         d = {}
         with open(f, 'rb') as fd:
             for line in fd:
@@ -38,8 +45,8 @@ class JsonFileComparer(object):
                 if len(pieces) == 2:
                     key, json_string = pieces
                     d[key] = json.loads(json_string)
-
         return d
+
 
 if __name__ == '__main__':
     xx = {"111": None, "23456": {"22222": 9999, "33333": "0000", "list": ["3333", "4444", "111"]}}

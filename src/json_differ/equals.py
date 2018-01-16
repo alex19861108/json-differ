@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+
 class Equals(object):
     @staticmethod
     def dict(one, other):
@@ -112,5 +113,6 @@ if __name__ == '__main__':
     xx = {"111": None, "23456": {"22222": 9999, "33333": "0000", "list": ["3333", "4444", "111"]}}
     yy = {"111": None, "23456": {"22222": 9999, "33333": "0000", "list": ["111", "3333", "4444"]}}
     xx = {"error_message": "INVALID_IMAGE_URL"}
+    #xx = {"image_id": "0Ajals8uygFhXbOGzKpqCQ==", "faces": [{"face_rectangle": {"width": 86, "top": 277, "height": 86, "left": 169}}]}
     yy = {"image_id": "0Ajals8uygFhXbOGzKpqCQ==", "faces": [{"face_rectangle": {"width": 86, "top": 277, "height": 86, "left": 169}}]}
     print Equals.cmp(xx, yy)

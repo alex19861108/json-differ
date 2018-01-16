@@ -1,6 +1,6 @@
 import sys
 
-from src.json_differ.json_differ import JsonFileComparer
+from json_differ.json_differ import JsonFileComparer
 
 if __name__ == '__main__':
     jfc = JsonFileComparer()
